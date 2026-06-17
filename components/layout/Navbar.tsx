@@ -18,11 +18,11 @@ export default function Navbar({ transparent = false, showAdmin = true }: Navbar
       className={clsx(
         "flex items-center justify-between px-8 py-4 z-50",
         transparent
-          ? "fixed top-0 left-0 right-0 bg-ink/80 backdrop-blur-xl border-b border-white/[0.05]"
-          : "sticky top-0 bg-ink border-b border-white/[0.06]"
+          ? "fixed top-0 left-0 right-0 bg-paper/90 backdrop-blur-xl border-b border-black/[0.07]"
+          : "sticky top-0 bg-white border-b border-black/[0.08] shadow-sm"
       )}
     >
-      <Link href="/" className="font-serif italic text-white text-xl">
+      <Link href="/" className="font-serif italic text-ink text-xl">
         <span className="text-sage2">Ec</span>ho
       </Link>
 
@@ -44,8 +44,8 @@ export default function Navbar({ transparent = false, showAdmin = true }: Navbar
             className={clsx(
               "text-sm transition-colors",
               pathname === href || (href === "/submit" && onSubmit)
-                ? "text-sage2 font-medium"
-                : "text-stone hover:text-white"
+                ? "text-sage font-medium"
+                : "text-stone hover:text-ink"
             )}
           >
             {label}
@@ -57,7 +57,7 @@ export default function Navbar({ transparent = false, showAdmin = true }: Navbar
         {showAdmin && (
           <Link
             href="/admin/login"
-            className="text-stone text-sm hover:text-white transition-colors hidden sm:block"
+            className="text-stone text-sm hover:text-ink transition-colors hidden sm:block"
           >
             Admin
           </Link>

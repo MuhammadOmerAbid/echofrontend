@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -43,7 +43,7 @@ const FAQ = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-ink min-h-screen font-sans">
+    <div className="bg-paper min-h-screen font-sans">
       <Navbar showAdmin />
 
       {/* Hero */}
@@ -54,9 +54,9 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-sage2 font-semibold text-xs tracking-[0.26em] uppercase mb-5">About Echo</p>
-            <h1 className="font-display font-bold text-white mb-6" style={{ fontSize: "clamp(36px,6vw,72px)", lineHeight: 1.05 }}>
-              Anonymous. <span className="text-sage2">Honest.</span><br />Actionable.
+            <p className="text-sage font-semibold text-xs tracking-[0.26em] uppercase mb-5">About Echo</p>
+            <h1 className="font-display font-bold text-ink mb-6" style={{ fontSize: "clamp(36px,6vw,72px)", lineHeight: 1.05 }}>
+              Anonymous. <span className="text-sage">Honest.</span><br />Actionable.
             </h1>
             <p className="text-stone font-light text-base leading-relaxed max-w-2xl mb-8">
               Echo is a campus feedback platform built on the premise that students already know what's wrong — they just have
@@ -69,7 +69,7 @@ export default function AboutPage() {
                 Submit a Suggestion
               </Link>
               <Link href="/track"
-                className="border border-leaf/40 hover:border-leaf text-leaf hover:text-white rounded-full px-6 py-3 text-sm font-medium transition-colors">
+                className="border border-black/15 hover:border-sage text-stone hover:text-sage rounded-full px-6 py-3 text-sm font-medium transition-colors">
                 Track Your Submission
               </Link>
             </div>
@@ -78,7 +78,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="bg-ink2 py-20 px-8">
+      <section className="bg-white py-20 px-8">
         <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-10">
           {[
             { title: "The Problem", body: "Student concerns live in WhatsApp groups, anonymous forum posts, and whispered complaints — never reaching the people who can actually fix things. Traditional surveys have low response rates and no structure. Town halls are intimidating. The feedback loop is broken." },
@@ -87,7 +87,7 @@ export default function AboutPage() {
           ].map((col, i) => (
             <motion.div key={col.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6 }}>
-              <h3 className="font-display font-bold text-white text-lg mb-3">{col.title}</h3>
+              <h3 className="font-display font-bold text-ink text-lg mb-3">{col.title}</h3>
               <p className="text-stone font-light text-sm leading-relaxed">{col.body}</p>
             </motion.div>
           ))}
@@ -155,11 +155,11 @@ export default function AboutPage() {
       </section>
 
       {/* Tech stack */}
-      <section className="bg-ink2 py-20 px-8">
+      <section className="bg-white py-20 px-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-sage2 text-xs font-semibold tracking-[0.26em] uppercase mb-4">Technology</p>
-          <h2 className="font-display font-bold text-white mb-10" style={{ fontSize: "clamp(26px,4vw,40px)", lineHeight: 1.15 }}>
-            Entirely open-source. <span className="text-sage2">Runs on one machine.</span>
+          <p className="text-sage text-xs font-semibold tracking-[0.26em] uppercase mb-4">Technology</p>
+          <h2 className="font-display font-bold text-ink mb-10" style={{ fontSize: "clamp(26px,4vw,40px)", lineHeight: 1.15 }}>
+            Entirely open-source. <span className="text-sage">Runs on one machine.</span>
           </h2>
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-3">
             {[
@@ -174,8 +174,8 @@ export default function AboutPage() {
               ["bcrypt + JWT", "Admin password hashing and session tokens"],
               ["bleach", "Input sanitization against XSS"],
             ].map(([name, desc]) => (
-              <div key={name} className="flex gap-3 py-2.5 border-b border-white/[0.04]">
-                <span className="font-mono text-sage2 text-sm font-medium w-32 shrink-0">{name}</span>
+              <div key={name} className="flex gap-3 py-2.5 border-b border-black/[0.07]">
+                <span className="font-mono text-sage text-sm font-medium w-32 shrink-0">{name}</span>
                 <span className="text-stone font-light text-sm">{desc}</span>
               </div>
             ))}
@@ -184,19 +184,19 @@ export default function AboutPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-ink py-24 px-8">
+      <section className="bg-paper py-24 px-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-sage2 text-xs font-semibold tracking-[0.26em] uppercase mb-4">FAQ</p>
-          <h2 className="font-display font-bold text-white mb-12" style={{ fontSize: "clamp(26px,4vw,40px)", lineHeight: 1.15 }}>
+          <p className="text-sage text-xs font-semibold tracking-[0.26em] uppercase mb-4">FAQ</p>
+          <h2 className="font-display font-bold text-ink mb-12" style={{ fontSize: "clamp(26px,4vw,40px)", lineHeight: 1.15 }}>
             Common questions.
           </h2>
           <div className="space-y-5">
             {FAQ.map((item, i) => (
               <motion.div key={item.q} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.5 }}
-                className="bg-ink2 border border-white/[0.06] rounded-2xl p-6"
+                className="bg-white border border-black/[0.07] rounded-2xl p-6"
               >
-                <h4 className="font-display font-semibold text-white text-base mb-2">{item.q}</h4>
+                <h4 className="font-display font-semibold text-ink text-base mb-2">{item.q}</h4>
                 <p className="text-stone font-light text-sm leading-relaxed">{item.a}</p>
               </motion.div>
             ))}
@@ -205,14 +205,14 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-ink border-t border-white/[0.04] px-8 py-6 flex justify-between items-center">
-        <Link href="/" className="font-serif italic text-white text-xl">
+      <footer className="bg-white border-t border-black/[0.08] px-8 py-6 flex justify-between items-center">
+        <Link href="/" className="font-serif italic text-ink text-xl">
           <span className="text-sage2">Ec</span>ho
         </Link>
         <div className="flex gap-6">
-          <Link href="/submit" className="text-stone/40 hover:text-white text-xs transition-colors">Submit</Link>
-          <Link href="/track" className="text-stone/40 hover:text-white text-xs transition-colors">Track</Link>
-          <Link href="/admin/login" className="text-stone/40 hover:text-white text-xs transition-colors">Admin</Link>
+          <Link href="/submit" className="text-stone hover:text-ink text-xs transition-colors">Submit</Link>
+          <Link href="/track" className="text-stone hover:text-ink text-xs transition-colors">Track</Link>
+          <Link href="/admin/login" className="text-stone hover:text-ink text-xs transition-colors">Admin</Link>
         </div>
       </footer>
     </div>

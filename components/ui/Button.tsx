@@ -12,9 +12,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANTS = {
   primary:   "bg-sage text-white hover:bg-sage2 disabled:opacity-50",
-  secondary: "border border-leaf/40 text-leaf hover:border-leaf hover:text-white",
-  ghost:     "border border-[#2a2c28] text-stone hover:text-white hover:border-stone",
-  danger:    "bg-red-900/30 border border-red-900/40 text-red-300 hover:bg-red-900/50",
+  secondary: "border border-black/15 text-stone hover:border-sage hover:text-sage",
+  ghost:     "border border-black/10 text-stone hover:text-ink hover:border-black/25",
+  danger:    "bg-red-50 border border-red-200 text-red-700 hover:bg-red-100",
 };
 
 const SIZES = {
@@ -37,7 +37,7 @@ export default function Button({
     <button
       disabled={loading || disabled}
       className={clsx(
-        "rounded-lg font-medium transition-colors duration-200 cursor-pointer",
+        "rounded-xl font-semibold transition-colors duration-200 cursor-pointer",
         VARIANTS[variant],
         SIZES[size],
         fullWidth && "w-full",

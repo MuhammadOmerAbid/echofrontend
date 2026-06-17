@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -72,10 +72,10 @@ const PRIVACY = [
 ];
 
 const sentCfg = {
-  positive: { label: "Positive",   color: "#e8580a", bg: "rgba(232,88,10,0.12)" },
-  neutral:  { label: "Neutral",    color: "#8c897f", bg: "rgba(140,137,127,0.12)" },
-  negative: { label: "Negative",   color: "#ef4444", bg: "rgba(239,68,68,0.1)" },
-  pending:  { label: "Processing", color: "#8c897f", bg: "rgba(140,137,127,0.08)" },
+  positive: { label: "Positive",   color: "#e8580a", bg: "rgba(232,88,10,0.1)" },
+  neutral:  { label: "Neutral",    color: "#8c897f", bg: "rgba(140,137,127,0.1)" },
+  negative: { label: "Negative",   color: "#ef4444", bg: "rgba(239,68,68,0.08)" },
+  pending:  { label: "Processing", color: "#8c897f", bg: "rgba(140,137,127,0.06)" },
 };
 
 export default function Home() {
@@ -112,17 +112,17 @@ export default function Home() {
     : null;
 
   return (
-    <div className="bg-ink min-h-screen font-sans">
+    <div className="bg-paper min-h-screen font-sans">
       <Navbar transparent showAdmin />
 
       {/* ══ HERO ══ */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, rgba(232,88,10,0.1) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }}
+          style={{ backgroundImage: "radial-gradient(circle, rgba(232,88,10,0.12) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }}
         />
-        <div className="absolute -top-10 -left-20 w-72 h-72 rounded-full bg-leaf/25 pointer-events-none" />
-        <div className="absolute -bottom-24 -right-28 w-[460px] h-[460px] rounded-full border-[56px] border-sage/30 pointer-events-none" />
-        <div className="absolute top-32 right-8 w-14 h-14 rounded-full bg-sage/12 pointer-events-none" />
+        <div className="absolute -top-10 -left-20 w-72 h-72 rounded-full pointer-events-none" style={{ background: "rgba(232,88,10,0.05)" }} />
+        <div className="absolute -bottom-24 -right-28 w-[460px] h-[460px] rounded-full border-[56px] border-sage/20 pointer-events-none" />
+        <div className="absolute top-32 right-8 w-14 h-14 rounded-full bg-sage/[0.08] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-8 pt-24 pb-28 grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -130,16 +130,16 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-sage2 font-semibold text-xs tracking-[0.25em] uppercase mb-5">
+            <p className="text-sage font-semibold text-xs tracking-[0.25em] uppercase mb-5">
               Student Voice Platform · 2026
             </p>
-            <h1 className="font-display font-bold text-white mb-6"
+            <h1 className="font-display font-bold text-ink mb-6"
               style={{ fontSize: "clamp(48px, 7vw, 88px)", lineHeight: 1.08, letterSpacing: "-0.02em" }}>
-              Your voice,<br />finally<br /><span className="text-sage2">heard.</span>
+              Your voice,<br />finally<br /><span className="text-sage">heard.</span>
             </h1>
             <p className="text-stone font-light text-[15px] leading-relaxed mb-10 max-w-md">
               An anonymous suggestion platform where students say what they actually think — and institutions finally see{" "}
-              <span className="text-white font-normal">the pattern behind the noise.</span>
+              <span className="text-ink font-medium">the pattern behind the noise.</span>
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/submit"
@@ -147,7 +147,7 @@ export default function Home() {
                 Submit Anonymously
               </Link>
               <a href="#how-it-works"
-                className="border border-leaf/40 hover:border-leaf text-leaf hover:text-white rounded-full px-7 py-3.5 text-sm font-medium transition-colors duration-200">
+                className="border border-black/15 hover:border-sage text-stone hover:text-sage rounded-full px-7 py-3.5 text-sm font-medium transition-colors duration-200">
                 How It Works →
               </a>
             </div>
@@ -163,7 +163,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 border-t border-sage/10 bg-ink2/60 backdrop-blur-sm">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-sage/10 bg-white/80 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-8 py-4">
             <span className="text-stone text-sm font-light">Anonymous by design · Zero logins · Never leaves campus · Built-in ML</span>
           </div>
@@ -171,9 +171,9 @@ export default function Home() {
       </section>
 
       {/* ══ LIVE STATS ══ */}
-      <section className="bg-ink2 py-16 px-8">
+      <section className="bg-white py-16 px-8">
         <div className="max-w-7xl mx-auto">
-          <p className="text-sage2 text-xs font-semibold tracking-[0.26em] uppercase mb-6 text-center">Live Platform Stats</p>
+          <p className="text-sage text-xs font-semibold tracking-[0.26em] uppercase mb-6 text-center">Live Platform Stats</p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {stats ? (
               [
@@ -184,8 +184,11 @@ export default function Home() {
                 { value: stats.locations_covered,          label: "Locations Covered",    accent: false },
               ].map(({ value, label, accent }) => (
                 <div key={label} className="text-center p-5 rounded-2xl"
-                  style={{ background: accent ? "rgba(232,88,10,0.12)" : "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <div className="font-display font-bold mb-1" style={{ fontSize: 28, color: accent ? "#f97316" : "#ffffff" }}>
+                  style={{
+                    background: accent ? "rgba(232,88,10,0.07)" : "#ffffff",
+                    border: accent ? "1px solid rgba(232,88,10,0.15)" : "1px solid rgba(0,0,0,0.07)",
+                  }}>
+                  <div className="font-display font-bold mb-1" style={{ fontSize: 28, color: accent ? "#e8580a" : "#111210" }}>
                     {value}
                   </div>
                   <div className="font-sans font-light text-xs" style={{ color: "#8c897f" }}>{label}</div>
@@ -194,16 +197,16 @@ export default function Home() {
             ) : (
               Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="text-center p-5 rounded-2xl animate-pulse"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <div className="h-7 w-16 rounded mx-auto mb-2" style={{ background: "rgba(255,255,255,0.06)" }} />
-                  <div className="h-3 w-24 rounded mx-auto" style={{ background: "rgba(255,255,255,0.04)" }} />
+                  style={{ background: "rgba(0,0,0,0.03)", border: "1px solid rgba(0,0,0,0.06)" }}>
+                  <div className="h-7 w-16 rounded mx-auto mb-2" style={{ background: "rgba(0,0,0,0.07)" }} />
+                  <div className="h-3 w-24 rounded mx-auto" style={{ background: "rgba(0,0,0,0.05)" }} />
                 </div>
               ))
             )}
           </div>
           <p className="text-center font-sans font-light text-xs mt-4" style={{ color: "#8c897f" }}>
             {stats ? "Real-time data from this deployment. " : "Connecting to local backend… "}
-            <a href="#track" className="text-sage2 hover:underline">Track your submission →</a>
+            <a href="#track" className="text-sage hover:underline">Track your submission →</a>
           </p>
         </div>
       </section>
@@ -260,18 +263,18 @@ export default function Home() {
       </section>
 
       {/* ══ FEATURES ══ */}
-      <section id="features" className="bg-ink2 py-24 px-8">
+      <section id="features" className="bg-white py-24 px-8">
         <div className="max-w-7xl mx-auto">
-          <p className="text-sage2 text-xs font-semibold tracking-[0.26em] uppercase mb-4">Core Features</p>
-          <h2 className="font-display font-bold text-white mb-16" style={{ fontSize: "clamp(28px,4vw,46px)", lineHeight: 1.15 }}>
-            Simple on the surface. <span className="text-sage2">Deep</span> underneath.
+          <p className="text-sage text-xs font-semibold tracking-[0.26em] uppercase mb-4">Core Features</p>
+          <h2 className="font-display font-bold text-ink mb-16" style={{ fontSize: "clamp(28px,4vw,46px)", lineHeight: 1.15 }}>
+            Simple on the surface. <span className="text-sage">Deep</span> underneath.
           </h2>
           <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
             {FEATURES.map((f) => (
               <div key={f.n} className="flex gap-5">
-                <div className="w-8 h-8 rounded-lg bg-sage/15 flex items-center justify-center text-sage2 text-[11px] font-bold shrink-0 mt-0.5">{f.n}</div>
+                <div className="w-8 h-8 rounded-lg bg-sage/10 flex items-center justify-center text-sage text-[11px] font-bold shrink-0 mt-0.5">{f.n}</div>
                 <div>
-                  <div className="font-display font-semibold text-white text-lg mb-2">{f.title}</div>
+                  <div className="font-display font-semibold text-ink text-lg mb-2">{f.title}</div>
                   <p className="text-stone font-light text-sm leading-relaxed">{f.desc}</p>
                 </div>
               </div>
@@ -281,11 +284,11 @@ export default function Home() {
       </section>
 
       {/* ══ ABOUT — ML PIPELINE ══ */}
-      <section id="about" className="bg-ink py-24 px-8">
+      <section id="about" className="bg-paper py-24 px-8">
         <div className="max-w-7xl mx-auto">
-          <p className="text-sage2 text-xs font-semibold tracking-[0.26em] uppercase mb-4">About Echo · Data Science Pipeline</p>
-          <h2 className="font-display font-bold text-white mb-4" style={{ fontSize: "clamp(28px,4vw,46px)", lineHeight: 1.15 }}>
-            Six stages from raw text<br />to <span className="text-sage2">institutional insight.</span>
+          <p className="text-sage text-xs font-semibold tracking-[0.26em] uppercase mb-4">About Echo · Data Science Pipeline</p>
+          <h2 className="font-display font-bold text-ink mb-4" style={{ fontSize: "clamp(28px,4vw,46px)", lineHeight: 1.15 }}>
+            Six stages from raw text<br />to <span className="text-sage">institutional insight.</span>
           </h2>
           <p className="text-stone font-light text-sm leading-relaxed mb-14 max-w-xl">
             Every submission travels through a fully local Python pipeline. No cloud API, no external NLP service.
@@ -297,15 +300,15 @@ export default function Home() {
               <motion.div key={p.label}
                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.55 }}
-                className="rounded-2xl p-6"
-                style={{ background: "#1a1c18", border: "1px solid rgba(255,255,255,0.06)" }}
+                className="rounded-2xl p-6 bg-white"
+                style={{ border: "1px solid rgba(0,0,0,0.07)" }}
               >
                 <div className="font-mono text-[10px] font-bold mb-3" style={{ color: "#e8580a", letterSpacing: "0.12em" }}>
                   STAGE {String(i + 1).padStart(2, "0")}
                 </div>
-                <div className="font-display font-bold text-white text-xl mb-1">{p.label}</div>
+                <div className="font-display font-bold text-ink text-xl mb-1">{p.label}</div>
                 <div className="font-mono text-xs mb-3 px-2 py-1 rounded-full inline-block"
-                  style={{ background: "rgba(232,88,10,0.15)", color: "#f97316" }}>
+                  style={{ background: "rgba(232,88,10,0.1)", color: "#e8580a" }}>
                   {p.tech}
                 </div>
                 <p className="text-stone font-light text-sm leading-relaxed">{p.desc}</p>
@@ -314,19 +317,19 @@ export default function Home() {
           </div>
 
           {/* Privacy sub-section */}
-          <p className="text-sage2 text-xs font-semibold tracking-[0.26em] uppercase mb-4">Privacy Architecture</p>
-          <h3 className="font-display font-bold text-white mb-10" style={{ fontSize: "clamp(22px,3vw,36px)", lineHeight: 1.2 }}>
-            Anonymous isn't a setting. <span className="text-sage2">It's the structure.</span>
+          <p className="text-sage text-xs font-semibold tracking-[0.26em] uppercase mb-4">Privacy Architecture</p>
+          <h3 className="font-display font-bold text-ink mb-10" style={{ fontSize: "clamp(22px,3vw,36px)", lineHeight: 1.2 }}>
+            Anonymous isn't a setting. <span className="text-sage">It's the structure.</span>
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             {PRIVACY.map((item, i) => (
               <motion.div key={item.title}
                 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="rounded-2xl p-6"
-                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+                className="rounded-2xl p-6 bg-white"
+                style={{ border: "1px solid rgba(0,0,0,0.07)" }}
               >
-                <h4 className="font-display font-semibold text-white text-base mb-2">{item.title}</h4>
+                <h4 className="font-display font-semibold text-ink text-base mb-2">{item.title}</h4>
                 <p className="text-stone font-light text-sm leading-relaxed">{item.body}</p>
               </motion.div>
             ))}
@@ -335,7 +338,7 @@ export default function Home() {
       </section>
 
       {/* ══ TRACK ══ */}
-      <section id="track" className="bg-paper py-24 px-8">
+      <section id="track" className="bg-warm py-24 px-8">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
           {/* Left */}
           <div>
@@ -354,7 +357,7 @@ export default function Home() {
                 { step: "03", text: "See category, sentiment, cluster — never individual identity." },
               ].map(({ step, text }) => (
                 <div key={step} className="flex gap-3 items-start">
-                  <div className="w-7 h-7 rounded-full bg-sage/15 flex items-center justify-center text-sage text-[10px] font-bold shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-full bg-sage/10 flex items-center justify-center text-sage text-[10px] font-bold shrink-0 mt-0.5">
                     {step}
                   </div>
                   <p className="text-stone font-light text-sm leading-relaxed pt-1">{text}</p>
@@ -444,7 +447,7 @@ export default function Home() {
                       <span className="font-sans text-xs" style={{ color: "#8c897f" }}>NLP Status</span>
                       <span className="font-sans font-medium text-xs px-2 py-0.5 rounded-full"
                         style={{
-                          background: trackResult.processed ? "rgba(232,88,10,0.12)" : "rgba(140,137,127,0.12)",
+                          background: trackResult.processed ? "rgba(232,88,10,0.1)" : "rgba(140,137,127,0.1)",
                           color: trackResult.processed ? "#e8580a" : "#8c897f",
                         }}>
                         {trackResult.processed ? "✓ Processed" : "⟳ Pending"}
@@ -465,7 +468,7 @@ export default function Home() {
                   style={{ border: "1px dashed rgba(0,0,0,0.1)", background: "rgba(0,0,0,0.015)" }}
                 >
                   <div className="px-5 py-3 border-b" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
-                    <div className="h-3 w-20 rounded animate-none" style={{ background: "rgba(0,0,0,0.06)" }} />
+                    <div className="h-3 w-20 rounded" style={{ background: "rgba(0,0,0,0.06)" }} />
                   </div>
                   <div className="px-5 py-4 space-y-3">
                     {["Category", "Location", "Submitted", "Week", "Cluster", "Priority"].map((l) => (
@@ -488,11 +491,11 @@ export default function Home() {
       </section>
 
       {/* ══ CLOSING CTA ══ */}
-      <section className="bg-ink py-28 px-8">
+      <section className="bg-white py-28 px-8">
         <div className="max-w-xl mx-auto text-center">
-          <p className="font-serif italic text-ink2 text-5xl mb-8 select-none">✦</p>
-          <h2 className="font-display font-bold text-white mb-5" style={{ fontSize: "clamp(26px,4vw,44px)", lineHeight: 1.15 }}>
-            Every campus has a <span className="text-sage2">gap.</span>
+          <p className="font-serif italic text-ink text-5xl mb-8 select-none">✦</p>
+          <h2 className="font-display font-bold text-ink mb-5" style={{ fontSize: "clamp(26px,4vw,44px)", lineHeight: 1.15 }}>
+            Every campus has a <span className="text-sage">gap.</span>
           </h2>
           <p className="text-stone font-light text-sm leading-relaxed mb-10">
             Echo lives in that gap. One anonymous suggestion means nothing. A hundred of them,
@@ -504,7 +507,7 @@ export default function Home() {
               Submit Your First Suggestion →
             </Link>
             <a href="#about"
-              className="inline-flex items-center border border-leaf/40 hover:border-leaf text-leaf hover:text-white font-medium rounded-full px-8 py-4 text-sm transition-colors duration-200">
+              className="inline-flex items-center border border-black/15 hover:border-sage text-stone hover:text-sage font-medium rounded-full px-8 py-4 text-sm transition-colors duration-200">
               Learn More
             </a>
           </div>
@@ -512,16 +515,16 @@ export default function Home() {
       </section>
 
       {/* ══ FOOTER ══ */}
-      <footer className="bg-ink border-t border-white/[0.04] px-8 py-6">
+      <footer className="bg-white border-t border-black/[0.08] px-8 py-6">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-          <span className="font-serif italic text-white text-xl"><span className="text-sage2">Ec</span>ho</span>
+          <span className="font-serif italic text-ink text-xl"><span className="text-sage2">Ec</span>ho</span>
           <div className="flex gap-6">
-            <Link href="/submit"    className="text-stone/40 hover:text-white text-xs transition-colors">Submit</Link>
-            <a    href="#track"     className="text-stone/40 hover:text-white text-xs transition-colors">Track</a>
-            <a    href="#about"     className="text-stone/40 hover:text-white text-xs transition-colors">About</a>
-            <Link href="/admin/login" className="text-stone/40 hover:text-white text-xs transition-colors">Admin</Link>
+            <Link href="/submit"    className="text-stone hover:text-ink text-xs transition-colors">Submit</Link>
+            <a    href="#track"     className="text-stone hover:text-ink text-xs transition-colors">Track</a>
+            <a    href="#about"     className="text-stone hover:text-ink text-xs transition-colors">About</a>
+            <Link href="/admin/login" className="text-stone hover:text-ink text-xs transition-colors">Admin</Link>
           </div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-stone/30">Python · FastAPI · Next.js</span>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-stone/60">Python · FastAPI · Next.js</span>
         </div>
       </footer>
     </div>
