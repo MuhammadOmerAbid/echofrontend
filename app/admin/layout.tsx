@@ -3,7 +3,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div
       style={{
         minHeight: "100vh",
-        background: "#f0ede8",
+        background: "#f7f5ef",
         backgroundImage: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(232,88,10,0.06), transparent)",
       }}
     >

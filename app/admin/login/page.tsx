@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen font-sans flex flex-col items-center justify-center px-6"
-      style={{ background: "#f0ede8" }}>
+      style={{ background: "#f7f5ef" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -38,11 +38,11 @@ export default function InsightsPage() {
     <>
       <AdminSidebar institution={institution} />
 
-      <main style={{ marginLeft: 252, marginRight: 16, marginTop: 16, marginBottom: 16, minHeight: "calc(100vh - 32px)", borderRadius: 20, background: "#fafaf8", boxShadow: "0 4px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.06)", overflowY: "auto" }}>
+      <main style={{ marginLeft: 252, marginRight: 16, marginTop: 16, marginBottom: 16, minHeight: "calc(100vh - 32px)", borderRadius: 20, background: "#ffffff", boxShadow: "0 4px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.06)", overflowY: "auto" }}>
         {/* Top bar */}
         <div
           className="flex items-start justify-between px-8 py-5"
-          style={{ background: "#fafaf8", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
+          style={{ background: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
         >
           <div>
             <div
