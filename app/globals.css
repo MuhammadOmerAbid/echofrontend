@@ -1,0 +1,27 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* next/font injects --font-serif and --font-sans on <html>. Do NOT redefine here. */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0d0f0c;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0d0f0c; }
+::-webkit-scrollbar-thumb { background: #2a2c28; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #c05c1f; }
+
+::selection { background: rgba(192,92,31,0.35); color: #fff; }
+
+/* Force select elements to respect dark styling */
+select option { background: #1a1c18; color: #fff; }
