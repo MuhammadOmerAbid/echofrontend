@@ -5,6 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { submitSuggestion, getCategories, getLocations } from "@/lib/api";
 import Navbar from "@/components/layout/Navbar";
+import Select from "@/components/ui/Select";
+import Textarea from "@/components/ui/Textarea";
+import Button from "@/components/ui/Button";
+import ErrorBox from "@/components/ui/ErrorBox";
 
 function getSessionId(): string {
   if (typeof window === "undefined") return "ssr";
@@ -16,12 +20,9 @@ function getSessionId(): string {
   return id;
 }
 
-const fieldClass =
-  "w-full bg-ink2 border border-white/[0.08] text-white text-sm px-4 py-3 rounded-xl outline-none focus:border-sage/60 transition-colors placeholder:text-stone/40 appearance-none";
-
 export default function SubmitPage() {
-  const [categories, setCategories] = useState<string[]>([]);
-  const [locations, setLocations]   = useState<string[]>([]);
+  const [categories, setCategories] = useState<{ value: string; label: string }[]>([]);
+  const [locations, setLocations]   = useState<{ value: string; label: string }[]>([]);
   const [category, setCategory]     = useState("");
   const [location, setLocation]     = useState("");
   const [text, setText]             = useState("");
@@ -31,8 +32,8 @@ export default function SubmitPage() {
   const [error, setError]           = useState("");
 
   useEffect(() => {
-    getCategories().then((d) => setCategories(d.map((c) => c.name)));
-    getLocations().then((d) => setLocations(d.map((l) => l.name)));
+    getCategories().then((d) => setCategories(d.map((c) => ({ value: c.name, label: c.name }))));
+    getLocations().then((d) => setLocations(d.map((l) => ({ value: l.name, label: l.name }))));
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -59,7 +60,7 @@ export default function SubmitPage() {
   }
 
   return (
-    <div className="min-h-screen bg-ink font-sans flex flex-col">
+    <div className="min-h-screen bg-paper font-sans flex flex-col">
       <Navbar showAdmin />
 
       <div className="flex-1 flex items-center justify-center px-6 py-16">
@@ -73,85 +74,54 @@ export default function SubmitPage() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="text-sage2 font-semibold text-xs tracking-[0.24em] uppercase mb-3">
+                <p className="text-sage font-semibold text-xs tracking-[0.24em] uppercase mb-3">
                   Anonymous Submission
                 </p>
-                <h1 className="font-display font-bold text-white text-3xl leading-snug mb-2">
-                  Say what you <span className="text-sage2">actually think.</span>
+                <h1 className="font-display font-bold text-ink text-3xl leading-snug mb-2">
+                  Say what you <span className="text-sage">actually think.</span>
                 </h1>
                 <p className="text-stone font-light text-sm leading-relaxed mb-8">
                   No name. No login. No trace. Your suggestion goes straight to the pattern — not to a person.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Category */}
-                  <div>
-                    <label className="block text-[10px] uppercase tracking-[0.2em] text-stone font-semibold mb-2">
-                      Category
-                    </label>
-                    <select
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                      required
-                      className={fieldClass}
-                    >
-                      <option value="" disabled>Select a category</option>
-                      {categories.map((c) => <option key={c} value={c}>{c}</option>)}
-                    </select>
-                  </div>
+                  <Select
+                    label="Category"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    options={categories}
+                    placeholder="Select a category"
+                    required
+                  />
 
-                  {/* Location */}
-                  <div>
-                    <label className="block text-[10px] uppercase tracking-[0.2em] text-stone font-semibold mb-2">
-                      Campus Location
-                    </label>
-                    <select
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      required
-                      className={fieldClass}
-                    >
-                      <option value="" disabled>Select a location</option>
-                      {locations.map((l) => <option key={l} value={l}>{l}</option>)}
-                    </select>
-                  </div>
+                  <Select
+                    label="Campus Location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    options={locations}
+                    placeholder="Select a location"
+                    required
+                  />
 
-                  {/* Text */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-stone font-semibold">
-                        Your Suggestion
-                      </label>
-                      <span className={`text-[11px] font-light ${1000 - text.length < 100 ? "text-red-400" : "text-stone/40"}`}>
-                        {1000 - text.length} left
-                      </span>
-                    </div>
-                    <textarea
-                      value={text}
-                      onChange={(e) => setText(e.target.value.slice(0, 1000))}
-                      rows={5}
-                      placeholder="Be specific. What's the issue, and what would help?"
-                      required
-                      className={`${fieldClass} resize-y`}
-                    />
-                  </div>
+                  <Textarea
+                    label="Your Suggestion"
+                    value={text}
+                    onChange={(e) => setText(e.target.value.slice(0, 1000))}
+                    rows={5}
+                    placeholder="Be specific. What's the issue, and what would help?"
+                    required
+                    charCount={text.length}
+                    maxChars={1000}
+                  />
 
-                  {error && (
-                    <div className="bg-red-900/20 border border-red-900/40 text-red-300 text-sm px-4 py-3 rounded-xl font-light">
-                      {error}
-                    </div>
-                  )}
+                  {error && <ErrorBox message={error} />}
 
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-sage hover:bg-sage2 disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl text-sm transition-colors duration-200"
-                  >
-                    {loading ? "Submitting…" : "Submit Anonymously →"}
-                  </button>
+                  <Button type="submit" fullWidth size="lg" loading={loading}>
+                    Submit Anonymously →
+                  </Button>
                 </form>
 
-                <p className="text-center mt-6 text-[11px] text-stone/30 font-light leading-relaxed">
+                <p className="text-center mt-6 text-[11px] text-stone/60 font-light leading-relaxed">
                   Your identity is never collected. Each submission receives a random token.
                 </p>
               </motion.div>
@@ -163,26 +133,25 @@ export default function SubmitPage() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="text-center mb-7">
-                  <p className="font-serif italic text-sage2 text-5xl mb-5 select-none">✦</p>
-                  <h2 className="font-display font-bold text-white text-3xl mb-3">Your voice has been heard.</h2>
+                  <p className="font-serif italic text-sage text-5xl mb-5 select-none">✦</p>
+                  <h2 className="font-display font-bold text-ink text-3xl mb-3">Your voice has been heard.</h2>
                   <p className="text-stone font-light text-sm leading-relaxed">
                     Your suggestion is anonymous and has joined the pattern. Thank you for speaking up.
                   </p>
                 </div>
 
-                <div className="bg-ink2 border border-white/[0.07] rounded-2xl p-5 mb-4">
-                  <p className="text-[9px] uppercase tracking-[0.22em] text-stone/40 font-semibold mb-2">
+                <div className="bg-white border border-black/[0.08] rounded-2xl p-5 mb-4">
+                  <p className="text-[9px] uppercase tracking-[0.22em] text-stone font-semibold mb-2">
                     Your Anonymous Token — save this
                   </p>
-                  <code className="text-sage2 text-sm font-mono break-all leading-relaxed">{token}</code>
-                  <p className="text-stone/40 text-[10px] font-light mt-2 leading-relaxed">
+                  <code className="text-sage text-sm font-mono break-all leading-relaxed">{token}</code>
+                  <p className="text-stone/70 text-[10px] font-light mt-2 leading-relaxed">
                     This token is your only link to this submission. It doesn't identify you — it lets you check the category and sentiment that were assigned.
                   </p>
                 </div>
 
-                {/* What happens next */}
-                <div className="bg-ink2 border border-white/[0.07] rounded-2xl p-5 mb-5">
-                  <p className="text-[9px] uppercase tracking-[0.22em] text-stone/40 font-semibold mb-3">What happens next</p>
+                <div className="bg-white border border-black/[0.08] rounded-2xl p-5 mb-5">
+                  <p className="text-[9px] uppercase tracking-[0.22em] text-stone font-semibold mb-3">What happens next</p>
                   <div className="space-y-2.5">
                     {[
                       { icon: "⟳", label: "NLP Pipeline", desc: "NLTK cleans your text, TextBlob scores sentiment, TF-IDF extracts keywords." },
@@ -190,12 +159,12 @@ export default function SubmitPage() {
                       { icon: "↑", label: "Priority Scoring", desc: "Recency + sentiment weight determines if it surfaces in the admin priority view." },
                     ].map(({ icon, label, desc }) => (
                       <div key={label} className="flex gap-3">
-                        <div className="w-7 h-7 rounded-full bg-sage/15 flex items-center justify-center text-sage2 text-xs shrink-0 mt-0.5">
+                        <div className="w-7 h-7 rounded-full bg-sage/10 flex items-center justify-center text-sage text-xs shrink-0 mt-0.5">
                           {icon}
                         </div>
                         <div>
-                          <div className="text-white text-xs font-semibold mb-0.5">{label}</div>
-                          <div className="text-stone/60 text-xs font-light">{desc}</div>
+                          <div className="text-ink text-xs font-semibold mb-0.5">{label}</div>
+                          <div className="text-stone text-xs font-light">{desc}</div>
                         </div>
                       </div>
                     ))}
@@ -212,11 +181,11 @@ export default function SubmitPage() {
                   <div className="flex gap-3">
                     <button
                       onClick={() => { setDone(false); setText(""); setCategory(""); setLocation(""); }}
-                      className="flex-1 border border-white/10 hover:border-white/25 text-stone hover:text-white rounded-full px-6 py-2.5 text-sm font-medium transition-colors"
+                      className="flex-1 border border-black/10 hover:border-black/25 text-stone hover:text-ink rounded-full px-6 py-2.5 text-sm font-medium transition-colors"
                     >
                       Submit Another
                     </button>
-                    <Link href="/" className="flex-1 text-center border border-white/10 hover:border-white/25 text-stone hover:text-white rounded-full px-6 py-2.5 text-sm font-medium transition-colors">
+                    <Link href="/" className="flex-1 text-center border border-black/10 hover:border-black/25 text-stone hover:text-ink rounded-full px-6 py-2.5 text-sm font-medium transition-colors">
                       Home
                     </Link>
                   </div>

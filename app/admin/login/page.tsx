@@ -4,14 +4,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { adminLogin } from "@/lib/api";
 import { setToken, isAuthenticated } from "@/lib/auth";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [password, setPassword] = useState("");
-  const [loading, setLoading]   = useState(false);
-  const [error, setError]       = useState("");
+  const [password, setPassword]     = useState("");
+  const [showPassword, setShowPass] = useState(false);
+  const [loading, setLoading]       = useState(false);
+  const [error, setError]           = useState("");
 
   useEffect(() => {
     if (isAuthenticated()) router.replace("/admin/dashboard");
@@ -33,7 +35,8 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-ink font-sans flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen font-sans flex flex-col items-center justify-center px-6"
+      style={{ background: "#f0ede8" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -41,17 +44,18 @@ export default function AdminLoginPage() {
         className="w-full max-w-sm"
       >
         <Link href="/" className="block text-center mb-10">
-          <span className="font-serif italic text-white text-2xl">
+          <span className="font-serif italic text-ink text-2xl">
             <span className="text-sage2">Ec</span>ho
           </span>
         </Link>
 
-        <div className="bg-ink2 border border-white/[0.07] rounded-2xl p-8" style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
+        <div className="bg-white rounded-2xl p-8"
+          style={{ border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
           <p className="text-[10px] uppercase tracking-[0.25em] text-stone font-semibold text-center mb-2">
             Admin Access
           </p>
-          <h1 className="font-display font-bold text-white text-2xl text-center mb-8">
-            Dashboard <span className="text-sage2">Login</span>
+          <h1 className="font-display font-bold text-ink text-2xl text-center mb-8">
+            Dashboard <span className="text-sage">Login</span>
           </h1>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -59,19 +63,29 @@ export default function AdminLoginPage() {
               <label className="block text-[10px] uppercase tracking-[0.2em] text-stone font-semibold mb-2">
                 Password
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter admin password"
-                required
-                autoFocus
-                className="w-full bg-ink border border-white/[0.08] focus:border-sage/50 text-white text-sm px-4 py-3 rounded-xl outline-none transition-colors placeholder:text-stone/30"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter admin password"
+                  required
+                  autoFocus
+                  className="w-full bg-white border border-black/10 focus:border-sage text-ink text-sm px-4 py-3 pr-11 rounded-xl outline-none transition-colors placeholder:text-stone/50"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPass(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone hover:text-ink transition-colors"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
             </div>
 
             {error && (
-              <div className="bg-red-900/20 border border-red-900/40 text-red-300 text-sm px-4 py-3 rounded-xl font-light">
+              <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-xl font-light">
                 {error}
               </div>
             )}
@@ -86,7 +100,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p className="text-center mt-6 text-[11px] text-stone/30 font-light leading-relaxed">
+        <p className="text-center mt-6 text-[11px] text-stone/60 font-light leading-relaxed">
           Student submissions are never visible here.<br />
           Only aggregate patterns are shown.
         </p>

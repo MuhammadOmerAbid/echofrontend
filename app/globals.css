@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -9,19 +9,18 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: #0d0f0c;
-  color: #ffffff;
+  background: #f7f5ef;
+  color: #111210;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #0d0f0c; }
-::-webkit-scrollbar-thumb { background: #2a2c28; border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #c05c1f; }
+::-webkit-scrollbar-track { background: #f7f5ef; }
+::-webkit-scrollbar-thumb { background: #d0cbc2; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #e8580a; }
 
-::selection { background: rgba(192,92,31,0.35); color: #fff; }
+::selection { background: rgba(232,88,10,0.18); color: #111210; }
 
-/* Force select elements to respect dark styling */
-select option { background: #1a1c18; color: #fff; }
+select option { background: #ffffff; color: #111210; }
