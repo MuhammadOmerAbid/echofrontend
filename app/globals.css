@@ -24,3 +24,9 @@ body {
 ::selection { background: rgba(232,88,10,0.18); color: #111210; }
 
 select option { background: #ffffff; color: #111210; }
+
+/* thin scrollbar for custom dropdowns */
+.echo-dropdown::-webkit-scrollbar { width: 4px; }
+.echo-dropdown::-webkit-scrollbar-track { background: transparent; }
+.echo-dropdown::-webkit-scrollbar-thumb { background: #d8d3ca; border-radius: 99px; }
+.echo-dropdown::-webkit-scrollbar-thumb:hover { background: #e8580a; }

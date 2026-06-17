@@ -88,19 +88,17 @@ export default function SubmitPage() {
                   <Select
                     label="Category"
                     value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={setCategory}
                     options={categories}
                     placeholder="Select a category"
-                    required
                   />
 
                   <Select
                     label="Campus Location"
                     value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    onChange={setLocation}
                     options={locations}
                     placeholder="Select a location"
-                    required
                   />
 
                   <Textarea

@@ -8,6 +8,7 @@ import { isAuthenticated } from "@/lib/auth";
 import AdminSidebar from "@/components/layout/AdminSidebar";
 import AdminPageSkeleton from "@/components/layout/AdminPageSkeleton";
 import Card from "@/components/ui/Card";
+import Select from "@/components/ui/Select";
 
 const SENT_STYLE: Record<string, { bg: string; text: string }> = {
   positive: { bg: "#fff1e6", text: "#9a3412" },
@@ -69,9 +70,6 @@ export default function SubmissionsPage() {
     loadData(newOffset);
   }
 
-  const selectCls =
-    "border rounded-xl px-3 py-2 text-sm outline-none transition-colors bg-white border-[rgba(0,0,0,0.1)] text-[#111210] focus:border-sage/50 appearance-none";
-
   const total = data?.total ?? 0;
   const totalPages = Math.ceil(total / PAGE_SIZE);
   const currentPage = Math.floor(offset / PAGE_SIZE) + 1;
@@ -97,28 +95,44 @@ export default function SubmissionsPage() {
           )}
         </div>
 
-        <div className="px-8 py-4 flex flex-wrap gap-3 items-center" style={{ borderBottom: "1px solid rgba(0,0,0,0.04)" }}>
-          <select value={catFilter} onChange={(e) => setCat(e.target.value)} className={selectCls}>
-            <option value="">All Categories</option>
-            {categoryOpts.map((c) => <option key={c} value={c}>{c}</option>)}
-          </select>
-          <select value={locFilter} onChange={(e) => setLoc(e.target.value)} className={selectCls}>
-            <option value="">All Locations</option>
-            {locationOpts.map((l) => <option key={l} value={l}>{l}</option>)}
-          </select>
-          <select value={sentFilter} onChange={(e) => setSent(e.target.value)} className={selectCls}>
-            <option value="">All Sentiments</option>
-            <option value="positive">Positive</option>
-            <option value="neutral">Neutral</option>
-            <option value="negative">Negative</option>
-          </select>
+        <div className="px-8 py-4 flex flex-wrap gap-3 items-end" style={{ borderBottom: "1px solid rgba(0,0,0,0.04)" }}>
+          <div style={{ width: 180 }}>
+            <Select
+              value={catFilter}
+              onChange={setCat}
+              placeholder="All Categories"
+              options={[
+                ...categoryOpts.map((c) => ({ value: c, label: c })),
+              ]}
+            />
+          </div>
+          <div style={{ width: 200 }}>
+            <Select
+              value={locFilter}
+              onChange={setLoc}
+              placeholder="All Locations"
+              options={locationOpts.map((l) => ({ value: l, label: l }))}
+            />
+          </div>
+          <div style={{ width: 160 }}>
+            <Select
+              value={sentFilter}
+              onChange={setSent}
+              placeholder="All Sentiments"
+              options={[
+                { value: "positive", label: "Positive" },
+                { value: "neutral",  label: "Neutral"  },
+                { value: "negative", label: "Negative" },
+              ]}
+            />
+          </div>
           {(catFilter || locFilter || sentFilter) && (
             <button
               onClick={() => { setCat(""); setLoc(""); setSent(""); }}
-              className="text-sm font-light transition-colors hover:text-ink"
+              className="text-sm font-light transition-colors hover:text-ink pb-3"
               style={{ color: "#8c897f" }}
             >
-              Clear filters ✕
+              Clear ✕
             </button>
           )}
         </div>
